@@ -68,7 +68,8 @@ class MovementsController < ApplicationController
     end
 
     def movement_child
-      @movi_child = Account.find(params[:account_id]).movements.find(params[:id]).movement_parents.where('movement_parent == ? and iva == ?', params[:id], false)
+      @val = params[:id]
+      @movi_child = Account.find(params[:account_id]).movements.find(@val[1..-1]).movement_parents.where('movement_parent == ? and iva == ?', @val[1..-1], false)
     end
 
     def add_register_child
