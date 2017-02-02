@@ -67,6 +67,11 @@ class MovementsController < ApplicationController
       redirect_to :back
     end
 
+    def movement_child
+      @movi_magic = Account.find(params[:account_id]).movements.find(params[:id]).movement_parents
+      @movi_child = @movi_magic.where('movement_parent == ? and iva == ?', params[:id], false)
+    end
+
     def add_register_child
       @original = Movement.find(params[:id])
       if MovementParent.where('movement_parent == ? and parent == ?', params[:id], true).blank?
