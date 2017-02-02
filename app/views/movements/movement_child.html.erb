@@ -149,7 +149,7 @@
 
     <div class="col-md-6">
       <% @sub_temp = 0 %>
-        <#% @movi_child = @movi_co.where('movement_parent == ? and iva == ?', params[:id], false)%>
+      <!-- aqui va movi_child es igual a movi_co cuando movement_parent sea igual al id e iva igual a false -->
         <% unless @movi_child.blank? %>
         <table>
             <thead>
