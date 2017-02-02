@@ -69,9 +69,11 @@ class MovementsController < ApplicationController
 
     def movement_child
       @val = params[:id]
+      @val = @val.delete("$").to_i
       # error en heroku lo detecta como $1 cuando debe tomar 1 por eso hago @val[1..-1]
       @account = params[:account_id]
-      @movi_child = Account.find(@account.delete("$").to_i).movements.find(@val.delete("$").to_i).movement_parents.where('movement_parent == ? and iva == ?', @val.delete("$").to_i, false)
+      @account = @account.delete("$").to_i
+      @movi_child = Account.find(@account).movements.find(@val).movement_parents.where('movement_parent == cast(? as integer) and iva == ?', @val, false)
     end
 
     def add_register_child
