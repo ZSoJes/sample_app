@@ -69,7 +69,9 @@ class MovementsController < ApplicationController
 
     def movement_child
       @val = params[:id]
-      @movi_child = Account.find(params[:account_id]).movements.find(@val[1..-1]).movement_parents.where('movement_parent == ? and iva == ?', @val[1..-1], false)
+      # error en heroku lo detecta como $1 cuando debe tomar 1 por eso hago @val[1..-1]
+      @account = params[:account_id]
+      @movi_child = Account.find(@account[1..-1]).movements.find(@val[1..-1]).movement_parents.where('movement_parent == ? and iva == ?', @val[1..-1], false)
     end
 
     def add_register_child
